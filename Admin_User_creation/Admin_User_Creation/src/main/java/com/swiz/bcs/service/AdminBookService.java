@@ -17,20 +17,21 @@ public class AdminBookService {
         return bookRepository.save(book);
     }
 
-    public void deleteBook(Long bookId) {
+    public void deleteBook(Integer bookId) {
         bookRepository.deleteById(bookId);
     }
 
-//    public Book updateBook(Long bookId, Book book) {
-//      if(book == null)
-//      {
-//          throw new IllegalArgumentException("Book not available");
-//
-//      }
-//
-
- //Implementation for updating book
- //Retrieve existing book, update fields, save back
+    /*Update book*/
+    public void updateBookDetails(Integer Id,Book updatedBook)
+    {
+        Book existingBook = bookRepository.findById(Id)
+                .orElseThrow(() -> new IllegalArgumentException("Book not found with ID:"+Id));
+        existingBook.setTitle(updatedBook.getTitle());
+        existingBook.setIsbn(updatedBook.getIsbn());
+        existingBook.setGenre(updatedBook.getGenre());
+        existingBook.setAuthor(updatedBook.getAuthor());
+     //   existingBook.setIsAvailable(updatedBook.getIsAvailable());
+        bookRepository.save(existingBook);
     }
 
     public List<Book> getAllBooks() {

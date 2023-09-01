@@ -16,11 +16,13 @@ public class AdminService {
     @Autowired
     private AdminRepository adminRepository;
 
+
     public UserAccount saveUser(UserDTO userDTO) {
         UserAccount userAccount = new UserAccount();
         userAccount.setUserName(userDTO.getUserName());
         userAccount.setPassword(userDTO.getPassword());
         userAccount.setEmail(userDTO.getEmail());
+        userAccount.setEnabled(userDTO.getEnabled());
         return adminRepository.save(userAccount);
     }
 
@@ -28,17 +30,29 @@ public class AdminService {
         return adminRepository.findAll();
     }
 
-    public UserAccount getUserById(Long id) {
+    public UserAccount getUserById(Integer id) {
         return adminRepository.findById(id).orElse(null);
     }
-//    public AddResponse deleteUser(int id)
-//    {
-//        adminRepository.deleteById(id);
-//        AddResponse res=new AddResponse();
-//        res.setMsg("User deleted!");
-//        res.setId(id);
-//        return res;
-//    }
-    // Other author-related operations
-}
 
+    /*Enable/Disable user*/
+//    @Transactional
+    public void enableUser(Integer Id) {
+        UserAccount user = adminRepository.findById(Id).orElse(null);
+        if (user != null) {
+            user.setEnabled(true);
+            adminRepository.save(user);
+        }
+    }
+
+    public void disableUser(Integer Id) {
+        UserAccount user = adminRepository.findById(Id).orElse(null);
+        if (user != null) {
+            user.setEnabled(false);
+            adminRepository.save(user);
+        }
+    }
+    public void deleteUserById(Integer id)
+    {
+        adminRepository.deleteById(id);
+    }
+}

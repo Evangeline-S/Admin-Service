@@ -6,14 +6,14 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "authors")
+@Table(name = "UserAccount")
 @Getter
 @Setter
 public class UserAccount {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private int id;
 
 
     private String userName;
@@ -23,6 +23,8 @@ public class UserAccount {
 
 
     private String email;
+
+    private Boolean enabled;
 
     // Getters and Setters
 
