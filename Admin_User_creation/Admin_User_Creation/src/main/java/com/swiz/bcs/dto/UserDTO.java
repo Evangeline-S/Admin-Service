@@ -1,17 +1,18 @@
 package com.swiz.bcs.dto;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserDTO {
+    private int id;
     private String userName;
     private String password;
     private String email;
-    private Boolean enabled;
+    private Boolean isactive;
 
     // getters and setters
 }

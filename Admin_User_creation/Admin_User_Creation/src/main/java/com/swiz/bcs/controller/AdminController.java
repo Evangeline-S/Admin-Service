@@ -18,10 +18,10 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 /* Create user by admin */
-    @PostMapping("/createUser")
-    public UserAccount createUser(@RequestBody UserDTO userDTO) {
-        return adminService.saveUser(userDTO);
-    }
+//    @PostMapping("/createUser")
+//    public UserAccount createUser(@RequestBody UserDTO userDTO) {
+//        return adminService.saveUser(userDTO);
+//    }
 /* Get al the user*/
     @GetMapping
     public List<UserAccount> getAlluser() {
@@ -33,36 +33,26 @@ public class AdminController {
         return adminService.getUserById(id);
     }
 
-/*Set user Status*/
-    @PutMapping("/users/{id}/enable")
-    public ResponseEntity<String> enableUser(@PathVariable Integer Id){
-        adminService.enableUser(Id);
-        return ResponseEntity.ok("User enabled");
-    }
-/*Set the user Status*/
-    @PutMapping("/users/{id}/disable")
-    public ResponseEntity<String> disableUser(Integer Id){
-        adminService.disableUser(Id);
-        return ResponseEntity.ok("User disabled");
-    }
     /*Delete the user using Id*/
-    @DeleteMapping("user/{id}")
-    public ResponseEntity<String> deleteUser(@PathVariable Integer id)
-    {
-        adminService.deleteUserById(id);
-        return ResponseEntity.ok("User deleted successfully");
-    }
-//    @DeleteMapping("/users/{userId}")
-//    public ResponseEntity<String> deleteUser(@PathVariable Integer Id) {
-//        try {
-//            adminService.deleteUserById(Id);
-//            return ResponseEntity.ok("User deleted successfully.");
-//        } catch (EmptyResultDataAccessException e) {
-//            return ResponseEntity.notFound().build();
-//        } catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-//                    .body("An error occurred while deleting the user.");
-//        }
+//    @DeleteMapping("user/{id}")
+//    public ResponseEntity<String> deleteUser(@PathVariable Integer id)
+//    {
+//        adminService.deleteUserById(id);
+//        return ResponseEntity.ok("User deleted successfully");
 //    }
+    // Endpoint to disable a user account
+    @PostMapping("/disable/{Id}")
+    public ResponseEntity<String> disableUserAccount(@PathVariable Integer Id) {
+        adminService.disableUserAccount(Id);
+        return ResponseEntity.ok("User account disabled successfully.");
+    }
+
+    // Endpoint to enable a user account
+    @PostMapping("/enable/{Id}")
+    public ResponseEntity<String> enableUserAccount(@PathVariable Integer Id) {
+        adminService.enableUserAccount(Id);
+        return ResponseEntity.ok("User account enabled successfully.");
+    }
 }
+
 

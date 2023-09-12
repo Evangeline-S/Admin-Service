@@ -11,26 +11,25 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class LoanDTO {
-
+    int id;
     private LocalDate issuedate;
-
     private LocalDate duedate;
-
-
     private LocalDate returnDate;
-
-    //  private Status loanStatus;
     private Boolean returned;
-
     private Double lateFee;
 
-//    @Enumerated(EnumType.STRING)
-//    private Loan.LoanStatus status;
+    //private LoanStatus status;
+    private BookDTO book;
+    private UserDTO userAccount;
 
-//    public enum LoanStatus{
-//        ONGOING,
-//        PAST
-//    }
+
+
+    private Loan.LoanStatus status;
+
+  //  public void setStatus(Loan.LoanStatus status) {
+   // }
+
+
 
     @Override
     public String toString() {
